@@ -4,148 +4,604 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vijay Saharan | Portfolio</title>
-  <meta name="description" content="Portfolio of Vijay Saharan - Computer Science student, developer, blogger, educator, and digital creator." />
+  <meta name="description" content="Portfolio of Vijay Saharan - Computer Science student, developer, educator, blogger, and digital creator." />
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0f172a;
+      --bg-soft: #111c34;
+      --card: rgba(30, 41, 59, 0.9);
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --primary: #38bdf8;
+      --primary-dark: #0ea5e9;
+      --border: rgba(148, 163, 184, 0.18);
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+      --radius: 18px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #0f172a 0%, #111827 100%);
+      color: var(--text);
       line-height: 1.6;
-      background: #0f172a;
-      color: #e2e8f0;
     }
-    a { color: #38bdf8; text-decoration: none; }
-    a:hover { text-decoration: underline; }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
     .container {
-      width: 90%;
-      max-width: 1100px;
+      width: min(1120px, 92%);
       margin: auto;
     }
+
     header {
-      background: linear-gradient(135deg, #1e293b, #0f172a);
-      padding: 60px 0;
-      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
     }
-    header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
     }
-    header p {
-      font-size: 1.1rem;
+
+    .logo {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.95rem;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .hero {
+      padding: 90px 0 70px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 380px;
+      height: 380px;
+      background: rgba(56, 189, 248, 0.12);
+      border-radius: 50%;
+      top: -80px;
+      right: -100px;
+      filter: blur(30px);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.9fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 7px 14px;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 999px;
+      color: var(--primary);
+      background: rgba(56, 189, 248, 0.08);
+      font-size: 0.9rem;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      color: #fff;
+    }
+
+    .hero h1 span {
+      color: var(--primary);
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.05rem;
       max-width: 700px;
-      margin: 0 auto 20px;
-      color: #cbd5e1;
+      margin-bottom: 26px;
     }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 26px;
+    }
+
     .btn {
       display: inline-block;
-      margin: 8px;
-      padding: 12px 20px;
-      border-radius: 10px;
-      background: #38bdf8;
+      padding: 12px 22px;
+      border-radius: 12px;
+      font-weight: bold;
+      transition: 0.3s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       color: #0f172a;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      border-color: rgba(56, 189, 248, 0.35);
+      color: var(--primary);
+      background: rgba(56, 189, 248, 0.05);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(56, 189, 248, 0.12);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .stat {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 18px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .stat h3 {
+      font-size: 1.5rem;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .stat p {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(30,41,59,0.95), rgba(17,24,39,0.95));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card h3 {
+      color: #fff;
+      margin-bottom: 12px;
+      font-size: 1.3rem;
+    }
+
+    .hero-card p {
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag {
+      background: rgba(56, 189, 248, 0.08);
+      color: #c7f0ff;
+      border: 1px solid rgba(56, 189, 248, 0.22);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+    }
+
+    section {
+      padding: 70px 0;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      max-width: 700px;
+      margin-bottom: 30px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 22px;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 24px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(56, 189, 248, 0.38);
+    }
+
+    .card h3 {
+      color: #fff;
+      margin-bottom: 10px;
+      font-size: 1.18rem;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.97rem;
+    }
+
+    .skills-list,
+    .links-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .skill-pill,
+    .link-pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.08);
+      border: 1px solid var(--border);
+      color: #dbeafe;
+      font-size: 0.92rem;
+    }
+
+    .projects .card a {
+      display: inline-block;
+      margin-top: 14px;
+      color: var(--primary);
       font-weight: bold;
     }
-    .btn.secondary {
-      background: transparent;
-      border: 1px solid #38bdf8;
-      color: #38bdf8;
-    }
-    section {
-      padding: 50px 0;
-    }
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      color: #7dd3fc;
-    }
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-    }
-    .card {
-      background: #1e293b;
-      padding: 20px;
-      border-radius: 14px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
-    }
-    .card h3 {
-      margin-bottom: 10px;
-      color: #f8fafc;
-    }
-    ul {
-      padding-left: 20px;
-    }
-    footer {
+
+    .contact-box {
       text-align: center;
-      padding: 25px 0;
-      border-top: 1px solid #334155;
-      color: #94a3b8;
+      padding: 34px;
+      background: linear-gradient(180deg, rgba(30,41,59,0.95), rgba(15,23,42,0.95));
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .contact-box p {
+      color: var(--muted);
+      max-width: 680px;
+      margin: 12px auto 24px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.94rem;
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .grid-3,
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 2.3rem;
+      }
+
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .nav-links {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero {
+        padding-top: 70px;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
     }
   </style>
 </head>
 <body>
+
   <header>
-    <div class="container">
-      <h1>Vijay Saharan</h1>
-      <p>Computer Science student, developer, educator, blogger, and digital creator building projects around coding, technology, gaming, education, and creativity.</p>
-      <a class="btn" href="https://github.com/pccodelitehub" target="_blank">View GitHub</a>
-      <a class="btn secondary" href="#projects">My Projects</a>
+    <div class="container nav">
+      <div class="logo">Vijay Saharan</div>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#platforms">Platforms</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </div>
   </header>
 
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">Computer Science Student • Developer • Creator</span>
+        <h1>Building my brand as <span>Vijay Saharan</span> through tech, coding, education, and creativity.</h1>
+        <p>
+          I create beginner-friendly learning content, digital projects, coding resources, and educational platforms to help students and creators explore the world of technology step by step.
+        </p>
+
+        <div class="hero-buttons">
+          <a class="btn btn-primary" href="https://github.com/pccodelitehub" target="_blank">View GitHub</a>
+          <a class="btn btn-secondary" href="#projects">Explore Projects</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <h3>12+</h3>
+            <p>Web Platforms</p>
+          </div>
+          <div class="stat">
+            <h3>6+</h3>
+            <p>Core Skills</p>
+          </div>
+          <div class="stat">
+            <h3>1</h3>
+            <p>Growing Personal Brand</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <h3>Brand Focus</h3>
+        <p>
+          My mission is to build an all-in-one destination for coding, technology, gaming, education, blogging, and creative digital learning.
+        </p>
+        <div class="tag-list">
+          <span class="tag">Programming</span>
+          <span class="tag">Web Development</span>
+          <span class="tag">Blogging</span>
+          <span class="tag">Education</span>
+          <span class="tag">Gaming</span>
+          <span class="tag">Creative Projects</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="about">
     <div class="container">
-      <h2>About Me</h2>
-      <div class="card">
-        <p>Hello! I’m Vijay Saharan, a passionate Computer Science student and content creator. I build educational blogs, coding resources, and digital projects to help students and beginners learn technology step by step.</p>
+      <h2 class="section-title">About Me</h2>
+      <p class="section-subtitle">
+        I am Vijay Saharan, a passionate Computer Science student, developer, blogger, educator, and digital creator. I enjoy building useful learning platforms and step-by-step content that makes technology easier for students and beginners.
+      </p>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Who I Am</h3>
+          <p>
+            I am focused on combining education, technology, creativity, and digital publishing into one strong personal brand. My goal is to create practical resources that people can actually use to learn and grow.
+          </p>
+        </div>
+        <div class="card">
+          <h3>My Mission</h3>
+          <p>
+            To make coding, web development, tech knowledge, and digital learning more accessible through beginner-friendly tutorials, structured series, and creative projects.
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
   <section id="skills">
     <div class="container">
-      <h2>Skills</h2>
-      <div class="card-grid">
-        <div class="card"><h3>Programming</h3><p>HTML, CSS, Python, Java, PHP, C++</p></div>
-        <div class="card"><h3>Web Development</h3><p>Frontend design, blogging platforms, beginner-friendly tutorials</p></div>
-        <div class="card"><h3>Content Creation</h3><p>Educational articles, course series, tech guides, project-based learning</p></div>
-        <div class="card"><h3>Creative Tech</h3><p>Gaming content, digital tools, brand building, online publishing</p></div>
+      <h2 class="section-title">Skills & Expertise</h2>
+      <p class="section-subtitle">
+        These are the main areas I work on across my projects, websites, and learning platforms.
+      </p>
+
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>Programming</h3>
+          <div class="skills-list">
+            <span class="skill-pill">HTML</span>
+            <span class="skill-pill">CSS</span>
+            <span class="skill-pill">Python</span>
+            <span class="skill-pill">Java</span>
+            <span class="skill-pill">PHP</span>
+            <span class="skill-pill">C++</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Development</h3>
+          <div class="skills-list">
+            <span class="skill-pill">Web Development</span>
+            <span class="skill-pill">Frontend Basics</span>
+            <span class="skill-pill">Project Building</span>
+            <span class="skill-pill">GitHub Pages</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Content & Brand</h3>
+          <div class="skills-list">
+            <span class="skill-pill">Blogging</span>
+            <span class="skill-pill">Educational Content</span>
+            <span class="skill-pill">Digital Publishing</span>
+            <span class="skill-pill">Personal Branding</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="projects">
+  <section id="projects" class="projects">
     <div class="container">
-      <h2>Projects</h2>
-      <div class="card-grid">
-        <div class="card"><h3>PC CodeLite Hub</h3><p>A coding and technology learning platform for tutorials and practical guides.</p></div>
-        <div class="card"><h3>Class 10th By VS</h3><p>Educational platform for class 10 students with structured study material.</p></div>
-        <div class="card"><h3>Class 11th With Vijay</h3><p>Learning resources and content for class 11 students.</p></div>
-        <div class="card"><h3>TechVerse By Vijay</h3><p>Technology-focused blog sharing guides, updates, and learning content.</p></div>
-        <div class="card"><h3>PC TechLite Gaming</h3><p>Gaming and game-related content for learners and enthusiasts.</p></div>
-        <div class="card"><h3>Saharan Academy</h3><p>Educational initiative focused on structured, accessible digital learning.</p></div>
+      <h2 class="section-title">Featured Projects</h2>
+      <p class="section-subtitle">
+        A few of the platforms and initiatives I’m building under my digital ecosystem.
+      </p>
+
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>PC CodeLite Hub</h3>
+          <p>Coding and technology learning platform with tutorials, guides, and educational resources.</p>
+          <a href="https://pccodelitehub.wordpress.com/" target="_blank">Visit Project</a>
+        </div>
+
+        <div class="card">
+          <h3>Class 10th By VS</h3>
+          <p>Educational website designed to help class 10 students with study material and structured learning content.</p>
+          <a href="https://class10thbyvs.wordpress.com/" target="_blank">Visit Project</a>
+        </div>
+
+        <div class="card">
+          <h3>Class 11th With Vijay</h3>
+          <p>Learning-focused platform for class 11 students with guided educational resources.</p>
+          <a href="https://class11withvijay.wordpress.com/" target="_blank">Visit Project</a>
+        </div>
+
+        <div class="card">
+          <h3>PC STUDY</h3>
+          <p>A student-focused educational platform built to simplify learning and digital study support.</p>
+          <a href="https://pcstudiescom.wordpress.com/" target="_blank">Visit Project</a>
+        </div>
+
+        <div class="card">
+          <h3>PC TechLite Gaming</h3>
+          <p>Gaming and tech-related content platform for learners, gamers, and digital explorers.</p>
+          <a href="https://pctechlitegaming.wordpress.com/" target="_blank">Visit Project</a>
+        </div>
+
+        <div class="card">
+          <h3>TechVerse By Vijay</h3>
+          <p>A technology blog sharing guides, updates, learning content, and practical digital knowledge.</p>
+          <a href="https://techversebyvijay.blogspot.com/" target="_blank">Visit Project</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="platforms">
+    <div class="container">
+      <h2 class="section-title">Online Platforms</h2>
+      <p class="section-subtitle">
+        My websites and social platforms where I share content, projects, and digital work.
+      </p>
+
+      <div class="card">
+        <div class="links-list">
+          <a class="link-pill" href="https://github.com/pccodelitehub" target="_blank">GitHub</a>
+          <a class="link-pill" href="https://instagram.com/pc_codelite_hub" target="_blank">Instagram</a>
+          <a class="link-pill" href="https://x.com/Desi_Jat_12" target="_blank">X</a>
+          <a class="link-pill" href="https://facebook.com/profile.php?id=61564570864771" target="_blank">Facebook</a>
+          <a class="link-pill" href="https://saharanacademey.wordpress.com/" target="_blank">Saharan Academy</a>
+          <a class="link-pill" href="https://saharanstudioblog.wordpress.com/" target="_blank">Saharan Studio</a>
+          <a class="link-pill" href="https://thedigitalworkshopbyvijay.wordpress.com/" target="_blank">Digital Workshop</a>
+          <a class="link-pill" href="https://upscquestionbank.wordpress.com/" target="_blank">UPSC Question Bank</a>
+          <a class="link-pill" href="https://techbyvijay.blogspot.com/" target="_blank">Tech World By Vijay</a>
+          <a class="link-pill" href="https://upscquestionbank01.blogspot.com/" target="_blank">UPSC Question Back</a>
+        </div>
       </div>
     </div>
   </section>
 
   <section id="contact">
     <div class="container">
-      <h2>Contact & Links</h2>
-      <div class="card">
-        <ul>
-          <li><a href="https://github.com/pccodelitehub" target="_blank">GitHub</a></li>
-          <li><a href="https://instagram.com/pc_codelite_hub" target="_blank">Instagram</a></li>
-          <li><a href="https://x.com/Desi_Jat_12" target="_blank">X (Twitter)</a></li>
-          <li><a href="https://facebook.com/profile.php?id=61564570864771" target="_blank">Facebook</a></li>
-        </ul>
+      <div class="contact-box">
+        <h2 class="section-title">Let’s Connect</h2>
+        <p>
+          I’m building my digital brand step by step through coding, education, blogging, and creative projects. You can connect with me through GitHub and my online platforms.
+        </p>
+        <div class="hero-buttons" style="justify-content:center;">
+          <a class="btn btn-primary" href="https://github.com/pccodelitehub" target="_blank">GitHub Profile</a>
+          <a class="btn btn-secondary" href="https://instagram.com/pc_codelite_hub" target="_blank">Instagram</a>
+        </div>
       </div>
     </div>
   </section>
 
   <footer>
     <div class="container">
-      <p>© 2026 Vijay Saharan | Built for GitHub Pages</p>
+      <p>© 2026 Vijay Saharan • Built with HTML, CSS, and GitHub Pages</p>
     </div>
   </footer>
+
 </body>
 </html>
