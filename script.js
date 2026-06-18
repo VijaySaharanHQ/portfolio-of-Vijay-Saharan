@@ -50,13 +50,16 @@ document.addEventListener('DOMContentLoaded', () => {
     
     setTimeout(type, 1000); // Start typing effect
 
-    // 3. Smooth Scroll Animation
+    // 3. Smooth Scroll Animation (Handled mostly by CSS now, but kept for older browsers)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
+            const targetId = this.getAttribute('href');
+            if(targetId === '#') return;
+            const targetElement = document.querySelector(targetId);
+            if(targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+            }
         });
     });
 
@@ -124,6 +127,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
+    // Observe progress bars and counters
+    document.querySelectorAll('.progress-bar, .counter').forEach(el => {
+        animateOnScroll.observe(el);
+    });
+
     // 6. AI Chat Functionality
     const chatWidgetBtn = document.getElementById('chat-widget-btn');
     const chatWindow = document.getElementById('chat-window');
@@ -132,56 +140,53 @@ document.addEventListener('DOMContentLoaded', () => {
     const sendBtn = document.getElementById('send-btn');
     const chatMessages = document.getElementById('chat-messages');
 
-    // Open/Close chat window
-    chatWidgetBtn.addEventListener('click', () => {
-        chatWindow.classList.add('active');
-        chatWidgetBtn.style.display = 'none'; // Hide bubble when open
-    });
+    if (chatWidgetBtn && chatWindow) {
+        // Open/Close chat window
+        chatWidgetBtn.addEventListener('click', () => {
+            chatWindow.classList.add('active');
+            chatWidgetBtn.style.display = 'none'; // Hide bubble when open
+        });
 
-    closeChatBtn.addEventListener('click', () => {
-        chatWindow.classList.remove('active');
-        chatWidgetBtn.style.display = 'flex'; // Show bubble when closed
-    });
+        closeChatBtn.addEventListener('click', () => {
+            chatWindow.classList.remove('active');
+            chatWidgetBtn.style.display = 'flex'; // Show bubble when closed
+        });
 
-    // Handle sending messages
-    function handleSendMessage() {
-        const text = chatInput.value.trim();
-        if (text === '') return;
+        // Handle sending messages
+        function handleSendMessage() {
+            const text = chatInput.value.trim();
+            if (text === '') return;
 
-        // 1. Create and display User message
-        const userMsg = document.createElement('div');
-        userMsg.classList.add('message', 'user-message');
-        userMsg.textContent = text;
-        chatMessages.appendChild(userMsg);
-        
-        // Clear input and scroll to bottom
-        chatInput.value = '';
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-
-        // 2. Simulate AI Typing/Response (Demo Mode)
-        setTimeout(() => {
-            const aiMsg = document.createElement('div');
-            aiMsg.classList.add('message', 'ai-message');
-            aiMsg.textContent = "Thanks for reaching out! Right now I am a demo UI. If you need to contact Vijay, please use the contact form above!";
-            chatMessages.appendChild(aiMsg);
+            // Create and display User message
+            const userMsg = document.createElement('div');
+            userMsg.classList.add('message', 'user-message');
+            userMsg.textContent = text;
+            chatMessages.appendChild(userMsg);
             
-            // Scroll to bottom
+            // Clear input and scroll to bottom
+            chatInput.value = '';
             chatMessages.scrollTop = chatMessages.scrollHeight;
-        }, 1000); // 1-second delay to feel like it's typing
-    }
 
-    // Send on button click
-    sendBtn.addEventListener('click', handleSendMessage);
-
-    // Send on 'Enter' key press
-    chatInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            handleSendMessage();
+            // Simulate AI Typing/Response
+            setTimeout(() => {
+                const aiMsg = document.createElement('div');
+                aiMsg.classList.add('message', 'ai-message');
+                aiMsg.textContent = "Thanks for reaching out! Right now I am a demo UI. If you need to contact Vijay, please use the contact form above!";
+                chatMessages.appendChild(aiMsg);
+                
+                // Scroll to bottom
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1000); // 1-second delay
         }
-    });
 
-    // Observe progress bars and counters
-    document.querySelectorAll('.progress-bar, .counter').forEach(el => {
-        animateOnScroll.observe(el);
-    });
+        // Send on button click
+        sendBtn.addEventListener('click', handleSendMessage);
+
+        // Send on 'Enter' key press
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleSendMessage();
+            }
+        });
+    }
 });
