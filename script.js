@@ -124,6 +124,62 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
+    // 6. AI Chat Functionality
+    const chatWidgetBtn = document.getElementById('chat-widget-btn');
+    const chatWindow = document.getElementById('chat-window');
+    const closeChatBtn = document.getElementById('close-chat');
+    const chatInput = document.getElementById('chat-input');
+    const sendBtn = document.getElementById('send-btn');
+    const chatMessages = document.getElementById('chat-messages');
+
+    // Open/Close chat window
+    chatWidgetBtn.addEventListener('click', () => {
+        chatWindow.classList.add('active');
+        chatWidgetBtn.style.display = 'none'; // Hide bubble when open
+    });
+
+    closeChatBtn.addEventListener('click', () => {
+        chatWindow.classList.remove('active');
+        chatWidgetBtn.style.display = 'flex'; // Show bubble when closed
+    });
+
+    // Handle sending messages
+    function handleSendMessage() {
+        const text = chatInput.value.trim();
+        if (text === '') return;
+
+        // 1. Create and display User message
+        const userMsg = document.createElement('div');
+        userMsg.classList.add('message', 'user-message');
+        userMsg.textContent = text;
+        chatMessages.appendChild(userMsg);
+        
+        // Clear input and scroll to bottom
+        chatInput.value = '';
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        // 2. Simulate AI Typing/Response (Demo Mode)
+        setTimeout(() => {
+            const aiMsg = document.createElement('div');
+            aiMsg.classList.add('message', 'ai-message');
+            aiMsg.textContent = "Thanks for reaching out! Right now I am a demo UI. If you need to contact Vijay, please use the contact form above!";
+            chatMessages.appendChild(aiMsg);
+            
+            // Scroll to bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 1000); // 1-second delay to feel like it's typing
+    }
+
+    // Send on button click
+    sendBtn.addEventListener('click', handleSendMessage);
+
+    // Send on 'Enter' key press
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            handleSendMessage();
+        }
+    });
+
     // Observe progress bars and counters
     document.querySelectorAll('.progress-bar, .counter').forEach(el => {
         animateOnScroll.observe(el);
